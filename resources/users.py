@@ -81,10 +81,10 @@ def login():
         ), 401
 
 #logout route
-@users.route('/logout', methods=['GET'])
+@users.route('/logout', methods=['GET','DELETE'])
 def logout():
     logout_user()
-    print("Loggedout")
+    print("Logged out!!!!!")
 
     return jsonify(
         data={},
