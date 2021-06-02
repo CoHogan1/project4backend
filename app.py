@@ -28,6 +28,7 @@ def load_user(user_id):
 
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 app.register_blueprint(users, url_prefix='/api/v1/users')
+app.register_blueprint(players, url_prefix='/api/v1/player')
 
 #socketIO
 socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")# timing of this may be important.

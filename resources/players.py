@@ -11,6 +11,7 @@ player = Blueprint('users', 'player') # doubble check the db name
 # index
 @player.route('/', methods=['GET'])
 def player_index():
+    print("index")
     if current_user.is_authenticated:
         player_dic = [model_to_dict(play) for play in current_user.my_player]
 
@@ -32,6 +33,7 @@ def player_index():
 @player.route('/', methods=['POST'])
 @login_required
 def create_dog():
+    print('create')
     payload = request.get_json()
     new_player = models.User.create(name=payload['name'],email=payload['email'],username=payload['username'])
     print(new_player)
@@ -45,6 +47,7 @@ def create_dog():
 #show
 @player.route('/<id>', methods=['GET'])
 def get_one_player(id):
+    print("show")
     print('get_one_player route accessed')
     player = models.Users.get_by_id(id)
     return  jsonify(
