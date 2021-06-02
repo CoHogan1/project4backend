@@ -4,14 +4,15 @@ from playhouse.shortcuts import model_to_dict
 from flask_login import current_user, login_required
 
 
-player = Blueprint('users', 'player') # doubble check the db name
+player = Blueprint('users', 'users') # bp name and import name
 
-#     /api/v1/player
+#     /api/v1/user
 
 # index
 @player.route('/', methods=['GET'])
 def player_index():
     print("index")
+    print(current_user)
     if current_user.is_authenticated:
         player_dic = [model_to_dict(play) for play in current_user.my_player]
 

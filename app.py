@@ -27,13 +27,15 @@ def load_user(user_id):
     return models.User.get(models.User.id == user_id)
 
 CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
+#CORS(player, origins=['http://localhost:8000'], supports_credentials=True)
 app.register_blueprint(users, url_prefix='/api/v1/users')
-app.register_blueprint(players, url_prefix='/api/v1/player')
+#app.register_blueprint(users, url_prefix='/api/v1/player')
 
 #socketIO
 socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")# timing of this may be important.
 @app.route('/')
 def hello():
+    print("this is the correct server")
     return 'server is running'
 
 #socketIO
