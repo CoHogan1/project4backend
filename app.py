@@ -12,7 +12,7 @@ from flask_socketio import SocketIO, send, emit
 load_dotenv()
 
 DEBUG=True
-PORT=8000
+PORT = os.environ.get("PORT")
 
 app = Flask(__name__) # instantiating the Flask class to create an app
 app.secret_key = os.environ.get("FLASK_APP_SECRET")
