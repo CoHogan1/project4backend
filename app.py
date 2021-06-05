@@ -32,8 +32,12 @@ app.register_blueprint(users, url_prefix='/api/v1/users')
 #app.register_blueprint(users, url_prefix='/api/v1/player')
 
 #socketIO
-socketio = SocketIO(app, cors_allowed_origins=["http://localhost:3000","https://front-end-444.herokuapp.com/"])
-#socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000") # previous ex
+
+if os.environ.get("FLASK_ENV") == 'development':
+    socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
+else:
+    socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com/") # previous ex
+
 
 @app.before_request # use this decorator to cause a function to run before reqs
 def before_request():
