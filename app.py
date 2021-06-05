@@ -32,7 +32,8 @@ app.register_blueprint(users, url_prefix='/api/v1/users')
 #app.register_blueprint(users, url_prefix='/api/v1/player')
 
 #socketIO
-socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")# timing of this may be important.
+socketio = SocketIO(app, cors_allowed_origins=["http://localhost:3000","https://front-end-444.herokuapp.com/"])
+#socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000") # previous ex
 
 @app.before_request # use this decorator to cause a function to run before reqs
 def before_request():
@@ -55,6 +56,9 @@ def hello():
     print("this is the correct server")
     return 'server is running'
 
+
+
+
 #socketIO
 @socketio.on('message')
 def handle_message(data):
@@ -69,6 +73,8 @@ def handle_move(player_move):
     #send(player_move, broadcast=True)
     socketio.emit('move', player_move)
     return None
+
+
 
 if __name__ == '__main__':
     models.init()
