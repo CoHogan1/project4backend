@@ -64,7 +64,7 @@ def hello():
 
 
 #socketIO
-@socketio.on('message')
+@socketio.on('message') # listener
 def handle_message(data):
     print('received message: ' + data)
     send(data, broadcast=True) # sends message to all.
@@ -77,8 +77,6 @@ def handle_move(player_move):
     #send(player_move, broadcast=True)
     socketio.emit('move', player_move)
     return None
-
-
 
 if __name__ == '__main__':
     models.init()
