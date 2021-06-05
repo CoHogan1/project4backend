@@ -26,7 +26,7 @@ login_manager.init_app(app)
 def load_user(user_id):
     return models.User.get(models.User.id == user_id)
 
-CORS(users, origins=['http://localhost:3000', 'https://back-end-444.herokuapp.com/'], supports_credentials=True)
+CORS(users, origins=['http://localhost:3000', 'https://back-end-444.herokuapp.com'], supports_credentials=True)
 #CORS(player, origins=['http://localhost:8000'], supports_credentials=True)
 app.register_blueprint(users, url_prefix='/api/v1/users')
 #app.register_blueprint(users, url_prefix='/api/v1/player')
@@ -36,8 +36,8 @@ app.register_blueprint(users, url_prefix='/api/v1/users')
 if os.environ.get("FLASK_ENV") == 'development':
     socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
 else:
-    socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com/") # previous ex
-
+    socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com") # previous ex
+print(socketio)
 
 @app.before_request # use this decorator to cause a function to run before reqs
 def before_request():
