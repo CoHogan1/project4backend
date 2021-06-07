@@ -60,9 +60,6 @@ def hello():
     print("this is the correct server")
     return 'server is running'
 
-
-
-
 #socketIO
 @socketio.on('message') # listener
 def handle_message(data):
