@@ -107,6 +107,7 @@ if __name__ == '__main__':
 
 
 
+
 if os.environ.get('FLASK_ENV') != 'development':
     print('\non heroku!')
     models.init()
