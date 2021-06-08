@@ -13,6 +13,8 @@ from flask_login import current_user, login_required
 users = Blueprint('users','users')
 
 
+# /api/v1/users
+
 #register
 @users.route('/register', methods=['POST'])
 def register():
@@ -137,7 +139,7 @@ def create_dog():
 def get_one_player(id):
     print("show")
     print('get_one_player route accessed')
-    player = models.Users.get_by_id(id)
+    player = models.User.get_by_id(id)
     return  jsonify(
         data = model_to_dict(player),
         message = "Found user",

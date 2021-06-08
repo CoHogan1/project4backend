@@ -4,7 +4,7 @@ from playhouse.shortcuts import model_to_dict
 from flask_login import current_user, login_required
 
 
-player = Blueprint('users', 'users') # bp name and import name
+#player = Blueprint('users', 'users') # bp name and import name
 
 #     /api/v1/user
 

@@ -11,33 +11,53 @@ from flask_socketio import SocketIO, send, emit
 
 load_dotenv()
 
+
+
 DEBUG = True
 PORT = os.environ.get("PORT")
+
+
 
 app = Flask(__name__) # instantiating the Flask class to create an app
 app.secret_key = os.environ.get("FLASK_APP_SECRET")
 app.config['SECRET_KEY'] = 'socket'
 #print(os.environ.get("FLASK_APP_SECRET"))
 
+
+
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
 
 @login_manager.user_loader
 def load_user(user_id):
     return models.User.get(models.User.id == user_id)
 
 
+
 #socketIO
 if os.environ.get("FLASK_ENV") == 'development':
     socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
+    CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
+
 else:
     socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com") # previous ex
-print(os.environ.get("FLASK_ENV"))
+    CORS(users, origins=['https://front-end-444.herokuapp.com'], supports_credentials=True)
 
-CORS(users, origins=['http://localhost:3000', 'https://front-end-444.herokuapp.com'], supports_credentials=True)
+
+
+print(os.environ.get("FLASK_ENV"))
+print("here**********************")
+
+
+
+#CORS(users, origins=['http://localhost:3000', 'https://front-end-444.herokuapp.com'], supports_credentials=True)
 #CORS(player, origins=['http://localhost:8000'], supports_credentials=True)
 app.register_blueprint(users, url_prefix='/api/v1/users')
 #app.register_blueprint(users, url_prefix='/api/v1/player')
+
+
 
 @app.before_request # use this decorator to cause a function to run before reqs
 def before_request():
@@ -53,6 +73,7 @@ def before_request():
         models.DATABASE.close()
         return response # go ahead and send response back to client
                       # (in our case this will be some JSON)
+
 
 
 @app.route('/')
@@ -75,10 +96,14 @@ def handle_move(player_move):
     socketio.emit('move', player_move)
     return None
 
+
+
 if __name__ == '__main__':
     models.init()
     app.run(debug=DEBUG, port=PORT)
     socketio.run(app)
+
+
 
 
 if os.environ.get('FLASK_ENV') != 'development':
