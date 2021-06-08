@@ -102,7 +102,7 @@ def handle_move(player_move):
 if __name__ == '__main__':
     models.init()
     app.run(debug=DEBUG, port=PORT)
-    socketio.run(app, secure=True)
+    socketio.run(app, log_output=True, debug=True)
 
 
 
