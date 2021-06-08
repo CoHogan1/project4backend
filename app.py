@@ -42,7 +42,8 @@ if os.environ.get("FLASK_ENV") == 'development':
     CORS(users, origins=['http://localhost:3000'], supports_credentials=True)
 
 else:
-    socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com") # previous ex
+    #socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com") # previous ex
+    socketio = SocketIO(app, cors_allowed_origins="*")
     CORS(users, origins=['https://front-end-444.herokuapp.com'], supports_credentials=True)
 
 
@@ -107,5 +108,5 @@ if __name__ == '__main__':
 
 
 if os.environ.get('FLASK_ENV') != 'development':
-  print('\non heroku!')
-  models.init()
+    print('\non heroku!')
+    models.init()
