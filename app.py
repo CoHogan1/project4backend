@@ -11,7 +11,7 @@ from flask_socketio import SocketIO, send, emit
 
 load_dotenv()
 
-DEBUG=True
+DEBUG = True
 PORT = os.environ.get("PORT")
 
 app = Flask(__name__) # instantiating the Flask class to create an app
@@ -26,18 +26,18 @@ login_manager.init_app(app)
 def load_user(user_id):
     return models.User.get(models.User.id == user_id)
 
-CORS(users, origins=['http://localhost:3000', 'https://front-end-444.herokuapp.com'], supports_credentials=True)
-#CORS(player, origins=['http://localhost:8000'], supports_credentials=True)
-app.register_blueprint(users, url_prefix='/api/v1/users')
-#app.register_blueprint(users, url_prefix='/api/v1/player')
 
 #socketIO
-
 if os.environ.get("FLASK_ENV") == 'development':
     socketio = SocketIO(app, cors_allowed_origins="http://localhost:3000")
 else:
     socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com") # previous ex
-print(socketio)
+print(os.environ.get("FLASK_ENV"))
+
+CORS(users, origins=['http://localhost:3000', 'https://front-end-444.herokuapp.com'], supports_credentials=True)
+#CORS(player, origins=['http://localhost:8000'], supports_credentials=True)
+app.register_blueprint(users, url_prefix='/api/v1/users')
+#app.register_blueprint(users, url_prefix='/api/v1/player')
 
 @app.before_request # use this decorator to cause a function to run before reqs
 def before_request():
