@@ -43,7 +43,7 @@ if os.environ.get("FLASK_ENV") == 'development':
 
 else:
     #socketio = SocketIO(app, cors_allowed_origins="https://front-end-444.herokuapp.com") # previous ex
-    socketio = SocketIO(app, cors_allowed_origins="*")
+    socketio = SocketIO(app, cors_allowed_origins="*") # This may be an issue. I'll check later
     CORS(users, origins=['https://front-end-444.herokuapp.com'], supports_credentials=True)
 
 
